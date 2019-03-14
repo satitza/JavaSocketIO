@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+    <appender name="LOGFILE" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="File" value="/media/Project/javasocketio/logs/log4j.log"/>
+        <param name="encoding" value="UTF-8"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="Application Log %d{yyyy-MM-dd HH:mm:ss.SSS} [%c:%L] %m%n"/>
+        </layout>
+    </appender>
+
+    <appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+        <param name="target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="Application Log %d{yyyy-MM-dd HH:mm:ss.SSS} [%c:%L] %m%n"/>
+        </layout>
+    </appender>
+
+    <root>
+        <level value="DEBUG"/>
+        <appender-ref ref="LOGFILE"/>
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</log4j:configuration>
