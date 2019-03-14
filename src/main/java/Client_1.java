@@ -46,7 +46,7 @@ public class Client_1 {
                     // get length of buffer
                     message = socketMessage.recevieMessage(br);
 
-                    if (Integer.valueOf(message) > 0) {
+                    if (!message.equalsIgnoreCase("close")) {
 
                         buffers = new byte[Integer.valueOf(message)];
 
@@ -63,10 +63,12 @@ public class Client_1 {
                             }
                         }
 
-                    }
+                    } else {
 
-                    socket.close();
-                    break;
+                        socket.close();
+                        break;
+
+                    }
 
                 }
 
@@ -74,7 +76,7 @@ public class Client_1 {
 
         } catch (IOException ex){
 
-            ex.printStackTrace();
+            System.out.println(ex.getMessage());
 
         }
     }

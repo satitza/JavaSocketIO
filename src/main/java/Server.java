@@ -15,13 +15,12 @@ public class Server  {
 
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
 
         try {
 
             server = new ServerSocket(port);
             logger.info("Server is started on port : " + server.getLocalPort());
-
 
             while (true) {
 
@@ -32,7 +31,6 @@ public class Server  {
 
         } catch (IOException ex) {
 
-            ex.printStackTrace();
             logger.error(ex.getMessage());
 
         }
@@ -112,6 +110,8 @@ class ThreadRequest implements Runnable {
                             }
 
                         } else {
+
+                            socketMessage.sendMessage(wr, "close");
 
                             socket.close();
                             logger.info("Client " + socket.getRemoteSocketAddress() + " connection is closed");
