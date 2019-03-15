@@ -9,7 +9,7 @@ public class Client_1 {
 
     private final static int port = 4444;
 
-    private static final String path = "/media/Project/javasocketio/src/main/java/";
+    private static final String path = "/media/Project/JavaSocketIO/src/main/java/";
     private static final String file = "java_stream_2.pdf";
 
     private static final String fullPath = path + file;
@@ -57,6 +57,10 @@ public class Client_1 {
                             if (recevieFile(socket, fullPath, buffers)) {
 
                                 System.out.println("Write file success");
+
+                                br.close();
+                                wr.close();
+
                                 socket.close();
                                 break;
 
@@ -64,6 +68,9 @@ public class Client_1 {
                         }
 
                     } else {
+
+                        br.close();
+                        wr.close();
 
                         socket.close();
                         break;
@@ -89,11 +96,16 @@ public class Client_1 {
             InputStream in = socket.getInputStream();
             FileOutputStream out = new FileOutputStream(fullPath);
 
+            int current_buffer = buffers.length;
+
             for(int length = in.read(buffers, 0, 1024); length > 0; length = in.read(buffers, 0, 1024)){
 
                 out.write(buffers, 0, length);
+                System.out.printf("Current buffer is %d\n" ,current_buffer -= length);
+
             }
 
+            in.close();
             out.close();
             return true;
 

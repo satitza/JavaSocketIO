@@ -45,7 +45,7 @@ class ThreadRequest implements Runnable {
 
     private static final Logger logger = Logger.getLogger(ThreadRequest.class.getName());
 
-    private static final String path = "/media/Project/javasocketio/src/main/java/";
+    private static final String path = "/media/Project/JavaSocketIO/src/main/java/";
     private static final String file = "java_stream.pdf";
 
     private static final String fullPath = path + file;
@@ -101,6 +101,10 @@ class ThreadRequest implements Runnable {
                                   if (sendFile(socket, file)){
 
                                       logger.info("Sent file success");
+
+                                      br.close();
+                                      wr.close();
+
                                       socket.close();
                                       logger.info("Client " + socket.getRemoteSocketAddress() + " connection is closed");
                                       break;
@@ -112,6 +116,9 @@ class ThreadRequest implements Runnable {
                         } else {
 
                             socketMessage.sendMessage(wr, "close");
+
+                            br.close();
+                            wr.close();
 
                             socket.close();
                             logger.info("Client " + socket.getRemoteSocketAddress() + " connection is closed");
@@ -148,6 +155,7 @@ class ThreadRequest implements Runnable {
                 out.write(Mb, 0, length);
             }
 
+            in.close();
             out.close();
             return true;
 
